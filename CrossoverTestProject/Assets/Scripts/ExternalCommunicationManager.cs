@@ -28,11 +28,12 @@ public class ExternalCommunicationManager : MonoBehaviour
         {
             yield return webRequest.SendWebRequest();
 
+            BlockData[] blocks = new BlockData[0];
+
             switch (webRequest.result)
             {
                 case UnityWebRequest.Result.Success:
 
-                    BlockData[] blocks;
                     try
                     {
                         blocks = JsonConvert.DeserializeObject<BlockData[]>(webRequest.downloadHandler.text);
@@ -50,8 +51,6 @@ public class ExternalCommunicationManager : MonoBehaviour
                         }
                     }
 
-                    _tableManager.GenerateBlockDictionary(blocks);
-
                     break;
 
                 case UnityWebRequest.Result.ConnectionError:
@@ -59,8 +58,20 @@ public class ExternalCommunicationManager : MonoBehaviour
 
                     Debug.LogError(string.Format("Something went wrong: {0}", webRequest.error));
 
+                    try
+                    {
+                        blocks = JsonConvert.DeserializeObject<BlockData[]>(_dummyData.text);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogException(ex);
+                        break;
+                    }
+
                     break;
             }
+
+            _tableManager.GenerateBlockDictionary(blocks);
         }
     }
 }
