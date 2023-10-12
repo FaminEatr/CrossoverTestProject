@@ -70,3 +70,11 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Unity File Paths
+CrossoverTestProject/UserSettings
+CrossoverTestProject/Temp
+CrossoverTestProject/.vsconfig
+CrossoverTestProject/obj
+CrossoverTestProject/Logs
+CrossoverTestProject/Library
