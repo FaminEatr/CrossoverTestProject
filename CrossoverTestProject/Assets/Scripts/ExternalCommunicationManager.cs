@@ -26,6 +26,9 @@ public class ExternalCommunicationManager : MonoBehaviour
     {
         using (UnityWebRequest webRequest = new UnityWebRequest(url))
         {
+            DownloadHandlerBuffer dH = new DownloadHandlerBuffer();
+
+            webRequest.downloadHandler = dH;
             yield return webRequest.SendWebRequest();
 
             BlockData[] blocks = new BlockData[0];
